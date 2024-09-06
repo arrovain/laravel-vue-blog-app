@@ -7,6 +7,9 @@
         <div class="col-span-full w-1/3 mx-auto">
             <input v-model="title" id="name" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
+        <p class="text-red-500" v-if="errors?.title">
+            {{ errors.title[0] }}
+        </p>
     </div>
 
     <div class="col-span-full w-1/3 mx-auto">
@@ -16,8 +19,12 @@
 
             </textarea>
         </div>
+        <p class="text-red-500" v-if="errors?.body">
+            {{ errors.body[0] }}
+        </p>
         </div>
     </form>
+    {{ errors }}
   </div>
 </template>
 
@@ -26,13 +33,22 @@ import { ref } from "vue"
 import axios from 'axios'
 const title = ref('')
 const body = ref('')
+const errors = ref({})
 const create = () => {
     axios.post('/api/post', {
         title: title.value,
         body: body.value,
-    })
+    }).then(response => {
+        if (res.status == 200) {
+            title.value = ''
+            body.value = ''
+        }
+}).catch(error => {
+    if (error.response.status == 422) {
+        errors.value = err.response.data.errors
+    }
+})
 }
-
 </script>
 
 <style>
