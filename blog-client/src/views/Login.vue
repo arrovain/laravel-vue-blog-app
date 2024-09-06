@@ -30,5 +30,10 @@
         </div>
 </template>
 
-<script>
+<script setup>
+import {userState } from '../store/user';
+import { ref } from 'vue';
+const email = ref('');
+const password = ref('');
+const store = userState();
 </script>
