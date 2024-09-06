@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 
 
-export const useCounterStore = defineStore("user", {
+export const userState = defineStore("user", {
     state: () => ({
        user: null,
 
