@@ -36,9 +36,18 @@ import { ref } from 'vue';
 const email = ref('');
 const password = ref('');
 const store = userState();
-
+const errors = ref({});
 
 const login = () => {
-    store.login(email.value, password.value);
+    store.login({email: email.value, password:  password.value}).catch(err => {
+        console.log(err);
+    if (err.response.status == 422) {
+
+        errors.value = err.response.data.errors;
+
+    }
+    
+});
 }
+
 </script>
