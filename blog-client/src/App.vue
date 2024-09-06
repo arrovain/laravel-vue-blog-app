@@ -1,15 +1,15 @@
 <script setup>
 import axios from 'axios';
 
-
- axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(response => {
+const login = async () => {
+await axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
 
  });
 
- axios.post('http://127.0.0.1:8000/login', {
+ await axios.post('http://localhost/login', {
   email:'arrovain@gmail.com',
   password: 'password'
- })
+ }) }
 </script>
 
 <template>
