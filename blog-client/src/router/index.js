@@ -30,7 +30,7 @@ const router = createRouter({
     
      },
      {
-      path: '/post/update/:slug',
+      path: '/post/update/:id',
       name: 'post.update',
       component: () => import('../views/UpdatePostView.vue')
      }
