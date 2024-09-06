@@ -9,11 +9,20 @@
                         <div class="mt-2">
                             <input id="email" type="email" name="email" autocomplete="email" required="" class="block-w-full rounded-md placeholder:text-gray-400 focust:ring-2 focus:ring-inset sm:text:sm sm:leading-6">
 
+                            <p class="text-red-500" v-if="errors?.email">
+                                
+                                {{ errors.email[0] }}
+                            </p>
                         </div>
-                        </div>
+                        </div> 
              
                         <div>
                             <input v-model="password" for="password" class="block text-sm font-medium leading-6 text-gray-600">Password</input>
+
+                            <p class="text-red-500" v-if="errors?.password">
+                                
+                                {{ errors.password[0] }}
+                            </p>
                         </div>
                     
                         <div>
