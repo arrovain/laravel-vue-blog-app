@@ -24,12 +24,28 @@
         </p>
         </div>
     </form>
+
+    <div class="flex justify-evenly my-4">
+        <h2 class="text-xl font-bold">Post</h2>
+        <h2 class="text-xl font-bold">Actions</h2>
+
+    </div>
+
+    <div class="flex justify-evenly text-center space-y-3" v-for="post in posts" :key="post.id">
+        <p class="text-lg font-bold">{{ post.title}}</p>
+        <div class="space-x-7 mr-10">
+            <RouterLink to="/" class="text-blue-500 hover:text-blue-600">Edit</RouterLink>
+            <button  class="text-red-500 hover:text-red-600">Delete</button>
+        </div>
+    </div>
+    
     {{ errors }}
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue"
+import { RouterLink } from 'vue-router'
 import axios from 'axios'
 const title = ref('')
 const body = ref('')
@@ -48,6 +64,19 @@ const create = () => {
         errors.value = err.response.data.errors
     }
 })
+}
+
+
+const fetchPosts = () => {
+    axios.get('/api/post').then(res => {
+        console.log(res);
+        posts.value = res.data.posts.data
+
+    })
+}
+
+mounted: {
+    fetchPosts()
 }
 </script>
 
