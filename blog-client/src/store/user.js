@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 
 
 export const userState = defineStore("user", {
+    persist:true,
     state: () => ({
        user: null,
 
@@ -13,6 +14,10 @@ export const userState = defineStore("user", {
     
     },
     actions: {
+
+        logout(){
+            this.user = null
+        },
        async login(data){
 
             await axios.get('/sanctum/csrf-cookie').then(res => {

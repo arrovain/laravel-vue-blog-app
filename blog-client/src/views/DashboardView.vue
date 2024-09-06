@@ -48,6 +48,7 @@
 
 <script setup>
 import { ref } from "vue"
+import {userState } from '../store/user'
 import { RouterLink } from 'vue-router'
 import axios from 'axios'
 const pagination = ref({})
