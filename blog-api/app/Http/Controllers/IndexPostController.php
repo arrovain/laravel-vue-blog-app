@@ -13,7 +13,7 @@ class IndexPostController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $posts = Post::latest()->paginate(10);
+        $posts = Post::latest()->simplePaginate(3);
         return response()-> json (compact('posts'));
     }
 }

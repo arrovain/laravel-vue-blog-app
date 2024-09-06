@@ -38,6 +38,11 @@
             <button  class="text-red-500 hover:text-red-600">Delete</button>
         </div>
     </div>
+
+    <div class="flex justify-center space-x-3 mb-10">
+        <button :disabled="!pagination.prev_page_url" @click="fetchPosts(pagination.prev_page_url)">Previous</button>
+        <button :disabled="!pagination.next_page_url" @click="fetchPosts(pagination.next_page_url)">Next</button>
+    </div>
     
     {{ errors }}
   </div>
@@ -47,6 +52,7 @@
 import { ref } from "vue"
 import { RouterLink } from 'vue-router'
 import axios from 'axios'
+const pagination = ref({})
 const title = ref('')
 const body = ref('')
 const errors = ref({})
@@ -67,10 +73,16 @@ const create = () => {
 }
 
 
-const fetchPosts = () => {
-    axios.get('/api/post').then(res => {
+const fetchPosts = (url = 'api/post') => {
+    axios.get(url).then(res => {
         console.log(res);
         posts.value = res.data.posts.data
+        pagination.value = {
+           next_page_url: res.data.posts.next_page_url,
+           prev_page_url: res.data.posts.prev_page_url,
+        
+        
+        }
 
     })
 }
