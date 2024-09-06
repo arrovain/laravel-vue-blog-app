@@ -35,7 +35,7 @@
         <p class="text-lg font-bold">{{ post.title}}</p>
         <div class="space-x-7 mr-10">
             <RouterLink to="{name:'post.update', params:{id:post.id}}" class="text-blue-500 hover:text-blue-600">Edit</RouterLink>
-            <button  class="text-red-500 hover:text-red-600">Delete</button>
+            <button @click="removePost(post.id)"  class="text-red-500 hover:text-red-600">Delete</button>
         </div>
     </div>
 
@@ -43,9 +43,7 @@
         <button :disabled="!pagination.prev_page_url" @click="fetchPosts(pagination.prev_page_url)">Previous</button>
         <button :disabled="!pagination.next_page_url" @click="fetchPosts(pagination.next_page_url)">Next</button>
     </div>
-    
     {{ errors }}
-  </div>
 </template>
 
 <script setup>
@@ -86,6 +84,17 @@ const fetchPosts = (url = 'api/post') => {
 
     })
 }
+
+
+const deletePost = (id) => {
+    let answer = confirm('Are you sure you want to delete this post?')
+    if(!answer) return
+    axios.delete('/api/post' + id).then(res =>{
+        if (res.status == 204) {
+            fetchPosts()
+    }
+})}
+
 
 mounted: {
     fetchPosts()
