@@ -13,8 +13,16 @@ export const useCounterStore = defineStore("user", {
     
     },
     actions: {
-        login(){
+       async login(data){
 
-        }},
+            await axios.get('/sanctum/csrf-cookie').then(response => {
+
+            });
+           
+            await axios.post('/login', data)
+
+        },
+
+    },
 
 });
