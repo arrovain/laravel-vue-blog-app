@@ -34,7 +34,7 @@
     <div class="flex justify-evenly text-center space-y-3" v-for="post in posts" :key="post.id">
         <p class="text-lg font-bold">{{ post.title}}</p>
         <div class="space-x-7 mr-10">
-            <RouterLink to="/" class="text-blue-500 hover:text-blue-600">Edit</RouterLink>
+            <RouterLink to="{name:'post.update', params:{slug:post.slug}}" class="text-blue-500 hover:text-blue-600">Edit</RouterLink>
             <button  class="text-red-500 hover:text-red-600">Delete</button>
         </div>
     </div>

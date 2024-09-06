@@ -28,6 +28,11 @@ const router = createRouter({
       name: 'dashboard',
       component: () => import('../views/DashboardView.vue')
     
+     },
+     {
+      path: '/post/update/:slug',
+      name: 'post.update',
+      component: () => import('../views/UpdatePostView.vue')
      }
   ]
 })
