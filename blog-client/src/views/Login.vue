@@ -36,4 +36,9 @@ import { ref } from 'vue';
 const email = ref('');
 const password = ref('');
 const store = userState();
+
+
+const login = () => {
+    store.login(email.value, password.value);
+}
 </script>
